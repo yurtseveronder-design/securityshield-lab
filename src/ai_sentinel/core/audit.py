@@ -5,7 +5,7 @@ Records structured security events and threat telemetry.
 
 import logging
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any
 
 logger = logging.getLogger("security_shield.audit")
@@ -24,7 +24,7 @@ class AuditLogger:
         Generates a structured JSON audit record for a security inspection event.
         """
         event = {
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "service": self.service_name,
             "action": action,
             "risk_score": risk_score,
